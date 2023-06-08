@@ -16,8 +16,8 @@ class Contact
 
 class PhoneBook
 {
-  public:
-	PhoneBook();
+ //  public:
+	// PhoneBook();
 
   private:
 	Contact book[8];
@@ -56,7 +56,7 @@ class PhoneBook
 		std::string input;
 		int index = 42;
 
-		while (true)
+		while (!std::cin.eof())
 		{
 			std::cout << "Please contact index (Enter 'home' to quit this menu) : ";
 			std::getline(std::cin, input);
@@ -94,8 +94,14 @@ class PhoneBook
 
 	void get_info(std::string &info, const char str[])
 	{
-		std::cout << str;
-		std::getline(std::cin, info);
+        info = "";
+        while (!std::cin.eof() && info.empty())
+         {
+            info = "";
+            std::cout << str;
+            std::getline(std::cin, info);
+            // std::cout << info;
+        }
 	}
 
   public:
@@ -139,9 +145,7 @@ class PhoneBook
 		std::string element;
 
 		std::cout << "\nNEW CONTACT\n";
-        do
-			get_info(book[oldest_index].firstname, "Firstname : ");
-		while (book[oldest_index].firstname != "");
+        get_info(book[oldest_index].firstname, "Firstname : ");
 		get_info(book[oldest_index].lastname, "Lastname : ");
 		get_info(book[oldest_index].nickname, "Nickname : ");
 		get_info(book[oldest_index].phone, "Phone : ");
@@ -160,7 +164,7 @@ int	main(void)
 
 	phone_book.init();
 	std::string input;
-	while (input != "EXIT" && input != "e")
+	while (!std::cin.eof() && input != "EXIT" && input != "e")
 	{
 		std::cout << "\nBLACKMAIL PHONEBOOK" << std::endl;
 		std::cout << "you can type : 'ADD', 'SEARCH' or 'EXIT' : \n";

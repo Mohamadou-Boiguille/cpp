@@ -7,22 +7,15 @@
 class Zombie
 {
   public:
-	Zombie(std::string name)
-	{
-		init_name(name);
-	}
+    Zombie();
+
+	Zombie(std::string name);
 
 	~Zombie();
 
-	void announce(void)
-	{
-		std::cout << name << ": BraiiiiiiinnnzzzZ..." << std::endl;
-	}
+	void announce(void);
 
-	void init_name(std::string zombie_name)
-	{
-		name = zombie_name;
-	}
+	void init_name(std::string zombie_name);
 
   private:
 	std::string name;
