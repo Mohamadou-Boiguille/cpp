@@ -3,22 +3,22 @@ CFLAGS = -std=c++98 -Wall -Wextra -Werror
 
 SRCS_DIR = src
 OBJS_DIR = .obj
-NAME = violence
-SRCS_LIST = HumanB.cpp Weapon.cpp HumanA.cpp main.cpp
+NAME = ft_sed
+SRCS_LIST = find_substr.cpp main.cpp
 SRCS = $(addprefix $(SRCS_DIR)/, $(SRCS_LIST))
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_LIST:.cpp=.o))
-HEADERS_LIST = HumanA.hpp Weapon.hpp HumanB.hpp
+HEADERS_LIST = find_substr.hpp
 HEADERS_DIR = inc
 HEADERS = $(addprefix $(HEADERS_DIR)/, $(HEADERS_LIST))
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) -g3 $(CFLAGS) -o $@ $^
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.cpp $(HEADERS) Makefile
 	mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) -g3 $(CFLAGS) -c $< -o $@
 
 .PHONY: all clean fclean re
 
@@ -29,3 +29,4 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
