@@ -43,7 +43,7 @@ void ClapTrap::attack(const std::string &target)
 		return (log(get_name(), "", 0, DEAD));
 	if (!get_energy_pts())
 		return (log(name, " attack", 0, NO_NRG));
-	set_energy_pts();
+	set_energy_pts(get_energy_pts() - 1);
 	log(get_name(), target, get_damage_pts(), true);
 }
 
@@ -67,21 +67,21 @@ void ClapTrap::beRepaired(unsigned int amount)
 		return (log(get_name(), "", 0, DEAD));
 	if (!get_energy_pts())
 		return (log(name, " repairing", 0, NO_NRG));
-	set_energy_pts();
+	set_energy_pts(get_energy_pts() - 1);
 	set_hit_pts(amount);
 	std::cout << get_name() << " is repairing (+" << amount;
 	std::cout << "). New hit points : " << get_hit_pts() << std::endl;
 }
 
-unsigned int ClapTrap::get_hit_pts()
+unsigned int ClapTrap::get_hit_pts() const
 {
 	return (ClapTrap::hit_pts);
 }
-unsigned int ClapTrap::get_energy_pts()
+unsigned int ClapTrap::get_energy_pts()const
 {
 	return (energy_pts);
 }
-unsigned int ClapTrap::get_damage_pts()
+unsigned int ClapTrap::get_damage_pts() const
 {
 	return (damage_pts);
 }
@@ -90,17 +90,17 @@ void ClapTrap::set_hit_pts(unsigned int amount)
 	if (hit_pts)
 		ClapTrap::hit_pts += amount;
 }
-void ClapTrap::set_energy_pts()
+void ClapTrap::set_energy_pts(unsigned int amount)
 {
 	if (hit_pts)
-		ClapTrap::energy_pts -= 1;
+		ClapTrap::energy_pts = amount;
 }
 void ClapTrap::set_damage_pts(unsigned int amount)
 {
 	if (hit_pts)
 		ClapTrap::damage_pts += amount;
 }
-std::string ClapTrap::get_name()
+std::string &ClapTrap::get_name()
 {
 	return (ClapTrap::name);
 }
