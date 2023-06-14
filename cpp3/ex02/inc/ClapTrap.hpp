@@ -9,7 +9,6 @@ class ClapTrap
 	unsigned int hit_pts;
 	unsigned int energy_pts;
 	unsigned int damage_pts;
-    bool gate_keeper;
     void log(std::string name, std::string target, unsigned int damage, int type);
 
   public:

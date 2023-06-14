@@ -1,7 +1,7 @@
 #include "../inc/ScavTrap.hpp"
 
 ScavTrap::ScavTrap(std::string name)
-	: ClapTrap(name), gate_keeper(0)
+	: ClapTrap(name)
 {
     set_energy_pts(100);
     set_hit_pts(50);
@@ -10,7 +10,6 @@ ScavTrap::ScavTrap(std::string name)
 
 void ScavTrap::attack(const std::string &target)
 {
-    set_gate_keeper(-1);
 	if (!get_hit_pts())
     {
         std::cout << "Hey " << get_name() << " is dead !" << std::endl;
@@ -28,16 +27,4 @@ void ScavTrap::attack(const std::string &target)
     }
     std::cout << " strikes at " << target << " dealing a damaging blow of ";
     std::cout << get_damage_pts() << " points." << std::endl;
-}
-
-void ScavTrap::guardGate(void)
-{
-    std::cout << " enter in gate keeper mode :";
-    std::cout << " YOU SHALL NOT PASS !!!";
-    set_gate_keeper(5);
-}
-
-void ScavTrap::set_gate_keeper(unsigned int amount)
-{
-    this->gate_keeper += amount;
 }

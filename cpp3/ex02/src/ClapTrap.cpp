@@ -1,5 +1,4 @@
 #include "../inc/ClapTrap.hpp"
-#include <iostream>
 
 #define ATT 1
 #define DMG 2
@@ -39,7 +38,7 @@ void ClapTrap::log(std::string name, std::string target, unsigned int damage,
 	else if (type == REPAIR)
     {
         std::cout << target << " +";
-        std::cout << get_hit_pts() << " hit points." << std::endl;
+        std::cout << damage << " hit points." << std::endl;
     }
 }
 
