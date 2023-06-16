@@ -10,11 +10,12 @@ Animal::Animal() {
 }
 
 Animal::Animal(const std::string newType) : type(newType){
+    index = nextIndex++;
     std::cout << getType() << " constructor is called." << std::endl;
 }
 
 Animal::Animal(const Animal& other) {
-    index = ++nextIndex;
+    index = nextIndex++;
     type = other.type;
     sound = other.sound;
     std::cout << getType() << " nb " << getIndex();

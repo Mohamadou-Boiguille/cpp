@@ -25,6 +25,8 @@ class Animal
 	std::string getSound() const;
     int getIndex();
 
+    virtual void getThought() = 0;
+
   protected:
 	int index;
 	std::string type;

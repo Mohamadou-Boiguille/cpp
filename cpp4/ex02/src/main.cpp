@@ -12,17 +12,18 @@ int	main(int argc, char **argv)
 	Animal	*dogsAnCatsArray[100];
 	int		index;
 
+    // Animal animal;
 	std::string answer = " ";
 	(void)argv;
 	populateArray(dogsAnCatsArray);
 	while (!answer.empty() && argc != 2)
 	{
 		std::cout << "===> Ask for any animal thought ";
-		std::cout << "(give his index 0 to 99 - q to quit) : ";
+		std::cout << "(give his index 0 to 99 - e to exit) : ";
 		std::cin >> answer;
 		if (std::cin.eof())
 			break ;
-		if (answer.at(0) == 'q' || answer.at(0) == 'Q')
+		if (answer.at(0) == 'e' || answer.at(0) == 'E')
 			break ;
 		std::istringstream iss(answer);
 		if (!(iss >> index))
