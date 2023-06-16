@@ -1,22 +1,33 @@
 CC = g++
 CFLAGS = -std=c++98 -Wall -Wextra -Werror
 
-TARGET = main
-SRCS = tests.cpp
-HEADER = Account.hpp
-OBJS = $(SRCS:.cpp=.o)
+SRCS_DIR = src
+OBJS_DIR = .obj
+NAME = account
+SRCS_LIST = Account.cpp tests.cpp
+SRCS = $(addprefix $(SRCS_DIR)/, $(SRCS_LIST))
+OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_LIST:.cpp=.o))
+HEADERS_LIST = Account.hpp
+HEADERS_DIR = inc
+HEADERS = $(addprefix $(HEADERS_DIR)/, $(HEADERS_LIST))
 
-.PHONY: all clean re
+all: $(NAME)
 
-all: $(TARGET) $(HEADER)
-
-$(TARGET): $(OBJS)
+$(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $^ -o $@
 
-%.o: %.cpp Account.hpp
-	$(CC) $(CFLAGS) $< -o $@
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.cpp $(HEADERS) Makefile
+	mkdir -p $(OBJS_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+.PHONY: all clean fclean re
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -rf $(OBJS_DIR)
 
-re: clean all
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
+
+
