@@ -3,7 +3,7 @@ CFLAGS = -std=c++98 -Wall -Wextra -Werror
 
 SRCS_DIR = src
 OBJS_DIR = .obj
-NAME = fixed
+NAME = ClapTrap
 SRCS_LIST = ClapTrap.cpp main.cpp
 SRCS = $(addprefix $(SRCS_DIR)/, $(SRCS_LIST))
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_LIST:.cpp=.o))

@@ -16,12 +16,12 @@
 class Contact
 {
   public:
-	void set_contact(std::string contact_array[]);
-	void print_all_contact_infos();
-	void print_contact_research();
+	void setContact(std::string contactArray[]);
+	void printContact();
+	void printSearch();
 
   private:
-	void print_research(std::string &element);
+	void printCategory(std::string &element);
 	std::string firstname;
 	std::string lastname;
 	std::string nickname;

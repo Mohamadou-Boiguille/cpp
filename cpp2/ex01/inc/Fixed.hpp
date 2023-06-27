@@ -6,8 +6,8 @@
 
 class Fixed
 {
-	int fixed_v;
-	static const int fractional_bits;
+	int fp_val;
+	static const int fr_bits;
 
   public:
 	Fixed();

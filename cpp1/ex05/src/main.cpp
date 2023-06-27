@@ -4,7 +4,8 @@
 int main () {
     
     Harl few_months_later;
-    std::cout << "\n==== at the 'piscine :" << std::endl;
+
+    std::cout << "\n==== at the 'piscine : (bad input)" << std::endl;
     few_months_later.complain("n'importe quoi");
     std::cout << "\n==== two months and Harl be like" << std::endl;
     few_months_later.complain(DEBUG_STR);

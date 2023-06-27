@@ -1,22 +1,32 @@
 CC = g++
 CFLAGS = -std=c++98 -Wall -Wextra -Werror
 
-TARGET = main
-SRCS = main.cpp zombieHorde.cpp Zombie.cpp
-HEADERS = Zombie.h
-OBJS = $(SRCS:.cpp =.o)
+SRCS_DIR = src
+OBJS_DIR = .obj
+HEADERS_DIR = inc
+NAME = zombieHorde
+SRCS_LIST = Zombie.cpp ZombieHorde.cpp main.cpp 
+HEADERS_LIST = Zombie.hpp
 
-.PHONY : all clean re
+SRCS = $(addprefix $(SRCS_DIR)/, $(SRCS_LIST))
+OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_LIST:.cpp=.o))
+HEADERS = $(addprefix $(HEADERS_DIR)/, $(HEADERS_LIST))
 
-all : $(TARGET)
+all: $(NAME)
 
-$(TARGET) : $(OBJS)
-	$(CC) $(CFLAGS) -g3 -o $@ $^
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $^ -o $@
 
-%.o : %.cpp $(HEADERS)
-	$(CC) $(CFLAGS) -g3 -c $< -o $@
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.cpp $(HEADERS) Makefile
+	mkdir -p $(OBJS_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
 
-clean : rm -f $(OBJS) $(TARGET)
+.PHONY: all clean fclean re
 
-re :
-	clean all
+clean:
+	rm -rf $(OBJS_DIR)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all

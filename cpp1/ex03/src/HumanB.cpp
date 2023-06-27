@@ -7,7 +7,7 @@ void HumanB::attack()
     if (this->weapon && !this->weapon->getType().empty())
         std::cout << name << " attacks with their " << weapon->getType() << std::endl;
     else
-        std::cout << name << " attacks with their ... NOTHING " << name << " is unarmed !!!" << std::endl;
+        std::cout << name << " attacks with their NOTHING. " << name << " is unarmed !!!" << std::endl;
 }
 void HumanB::setWeapon(Weapon &in_weapon)
 {

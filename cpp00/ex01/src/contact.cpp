@@ -1,15 +1,15 @@
 #include "../inc/contact.hpp"
 
-void Contact::set_contact(std::string contact_array[])
+void Contact::setContact(std::string contactArray[])
 {
-	firstname = contact_array[FN];
-	lastname = contact_array[LN];
-	nickname = contact_array[NN];
-	phone = contact_array[PH];
-	secret = contact_array[SC];
+	firstname = contactArray[FN];
+	lastname = contactArray[LN];
+	nickname = contactArray[NN];
+	phone = contactArray[PH];
+	secret = contactArray[SC];
 }
 
-void Contact::print_all_contact_infos()
+void Contact::printContact()
 {
 	std::cout << "\nCONTACT INFOS\n";
 	std::cout << "Firstname         : " << firstname << "\n";
@@ -19,7 +19,7 @@ void Contact::print_all_contact_infos()
 	std::cout << "Darkest secret    : " << secret << "\n";
 }
 
-void Contact::print_research(std::string &element)
+void Contact::printCategory(std::string &element)
 {
 	if (element.length() < 10)
 	{
@@ -35,12 +35,12 @@ void Contact::print_research(std::string &element)
 	}
 }
 
-void Contact::print_contact_research()
+void Contact::printSearch()
 {
-	print_research(firstname);
+	printCategory(firstname);
 	std::cout << "|";
-	print_research(lastname);
+	printCategory(lastname);
 	std::cout << "|";
-	print_research(nickname);
+	printCategory(nickname);
 	std::cout << std::endl;
 }

@@ -4,7 +4,7 @@ int main (int argc, char **argv) {
     
     if (argc != 2)
     {
-        std::cout << "Only one parameter allowed" << std::endl;
+        std::cout << "Harl need one numeric parameter" << std::endl;
         return (0);
     }
     Harl filter;

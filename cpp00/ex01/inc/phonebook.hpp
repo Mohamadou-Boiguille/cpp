@@ -12,11 +12,11 @@ class PhoneBook
 	void add();
   private:
 	Contact book[8];
-	size_t nb_of_contacts;
-	void print_research(std::string &element);
+	size_t nbContacts;
+	// void print_research(std::string &element);
 	size_t getValidIndex();
-	void store_contact_infos(std::string &info, std::string str);
-	void choose_contact();
+	void storeContact(std::string &info, std::string str);
+	void chooseContact();
 };
 
 #endif // !PHONEBOOK_H

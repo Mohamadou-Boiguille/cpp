@@ -11,26 +11,23 @@ Fixed::Fixed()
 Fixed::Fixed(const Fixed &nb)
 	: fixed_v(nb.fixed_v)
 {
-	std::cout << "overloaded constructor called" << std::endl;
+	std::cout << "copy constructor called" << std::endl;
 }
 
 Fixed &Fixed::operator=(const Fixed &other)
 {
-	std::cout << "copy operator called" << std::endl;
+	std::cout << "copy assignement operator called" << std::endl;
 	if (this != &other)
-		fixed_v = other.fixed_v;
-	std::cout << fixed_v << "---" << other.fixed_v << std::endl;
+		this->fixed_v = other.fixed_v;
 	return (*this);
 }
 
 Fixed::~Fixed()
 {
 	std::cout << "Destructor called" << std::endl;
-	//destructor
 }
 
 int Fixed::getRawBits(void)
-//const pour indiquer que la fonction de ne modifie pas l'objet
 {
 	std::cout << "getRawBits member function called" << std::endl;
 	return (fixed_v);

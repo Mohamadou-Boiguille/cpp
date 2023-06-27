@@ -3,6 +3,7 @@
 int main()
 {
     ClapTrap clapTrap("Alice");
+    clapTrap.attack("Bob");
     clapTrap.beRepaired(5);
     for (int i = 0; i < 13; i++)
         clapTrap.attack("Bob");

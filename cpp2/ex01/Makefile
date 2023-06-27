@@ -14,11 +14,11 @@ HEADERS = $(addprefix $(HEADERS_DIR)/, $(HEADERS_LIST))
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) -g3 $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.cpp $(HEADERS) Makefile
 	mkdir -p $(OBJS_DIR)
-	$(CC) -g3 $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 .PHONY: all clean fclean re
 

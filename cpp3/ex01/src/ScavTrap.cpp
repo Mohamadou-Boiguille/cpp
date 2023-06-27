@@ -1,5 +1,18 @@
 #include "../inc/ScavTrap.hpp"
 
+    // ClapTrap();
+    // ClapTrap(std::string pl_name);
+    // ClapTrap(const ClapTrap&);
+    // ClapTrap &operator=(const ClapTrap&);
+    // ~ClapTrap();
+ScavTrap::ScavTrap()
+	: ClapTrap("John Doe"), gate_keeper(0)
+{
+    set_energy_pts(100);
+    set_hit_pts(50);
+    set_damage_pts(20);
+}
+
 ScavTrap::ScavTrap(std::string name)
 	: ClapTrap(name), gate_keeper(0)
 {
@@ -8,6 +21,15 @@ ScavTrap::ScavTrap(std::string name)
     set_damage_pts(20);
 }
 
+ScavTrap::ScavTrap(const ScavTrap& other)
+{
+    this->name = other->name;
+}
+
+ScavTrap &ScavTrap::operator=(const ScavTrap&)
+{
+
+}
 void ScavTrap::attack(const std::string &target)
 {
     set_gate_keeper(-1);

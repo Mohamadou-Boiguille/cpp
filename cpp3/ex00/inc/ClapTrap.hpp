@@ -19,7 +19,10 @@ class ClapTrap
     void set_damage_pts(unsigned int amount);
 
   public:
+    ClapTrap();
     ClapTrap(std::string pl_name);
+    ClapTrap(const ClapTrap&);
+    ClapTrap &operator=(const ClapTrap&);
     ~ClapTrap();
 	void attack(const std::string &target);
 	void takeDamage(unsigned int amout);

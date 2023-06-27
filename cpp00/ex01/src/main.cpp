@@ -2,18 +2,18 @@
 
 int	main(void)
 {
-	PhoneBook	phone_book;
+	PhoneBook	phoneBook;
 
 	std::string input;
-	while (!std::cin.eof() && input != "EXIT" && input != "e")
+	while (!std::cin.eof() && input != "EXIT"/*  && input != "e" */)
 	{
 		std::cout << "\nBLACKMAIL PHONEBOOK" << std::endl;
 		std::cout << "you can type : 'ADD', 'SEARCH' or 'EXIT' : \n";
 		std::getline(std::cin, input);
-		if (input == "ADD" || input == "a")
-			phone_book.add();
-		else if (input == "SEARCH" || input == "s")
-			phone_book.search();
+		if (input == "ADD"/*  || input == "a" */)
+			phoneBook.add();
+		else if (input == "SEARCH"/*  || input == "s" */)
+			phoneBook.search();
 		else if (input == "")
 			continue ;
 	}

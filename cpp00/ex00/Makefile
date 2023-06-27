@@ -1,18 +1,32 @@
 CC = g++
 CFLAGS = -std=c++98 -Wall -Wextra -Werror
 
-TARGET = megaphone
-SRCS = megaphone.cpp
+SRCS_DIR = src
+OBJS_DIR = .obj
+NAME = Megaphone
+SRCS_LIST = Megaphone.cpp main.cpp
+SRCS = $(addprefix $(SRCS_DIR)/, $(SRCS_LIST))
+OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_LIST:.cpp=.o))
+HEADERS_LIST = Megaphone.hpp
+HEADERS_DIR = inc
+HEADERS = $(addprefix $(HEADERS_DIR)/, $(HEADERS_LIST))
 
-.PHONY: all clean re
+all: $(NAME)
 
-all: $(TARGET) Makefile
-
-$(TARGET):$(SRCS)
+$(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $^ -o $@
 
-clean:
-	rm -f $(TARGET)
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.cpp $(HEADERS) Makefile
+	mkdir -p $(OBJS_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
 
-re: clean all
+.PHONY: all clean fclean re
+
+clean:
+	rm -rf $(OBJS_DIR)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
 
