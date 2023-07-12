@@ -1,17 +1,17 @@
 #pragma once
 #ifndef CONTACT_H
-# define CONTACT_H
+#define CONTACT_H
 
-# define FN 0
-# define LN 1
-# define NN 2
-# define PH 3
-# define SC 4
-# define HOME 42
+#define FN 0
+#define LN 1
+#define NN 2
+#define PH 3
+#define SC 4
+#define HOME 42
 
-# include <iostream>
-# include <sstream>
-# include <string>
+#include <iostream>
+#include <sstream>
+#include <string>
 
 class Contact
 {

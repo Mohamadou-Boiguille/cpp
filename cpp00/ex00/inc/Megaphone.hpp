@@ -9,5 +9,5 @@ class Megaphone
   public:
 	Megaphone();
 	Megaphone(std::string input);
-	bool printUpper(int argc, char **argv);
+	void printUpper(int argc, char **argv);
 };

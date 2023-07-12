@@ -8,13 +8,13 @@ PhoneBook::PhoneBook()
 
 void PhoneBook::search()
 {
-	size_t	i;
+	size_t i;
 
 	i = 0;
 	if (nbContacts == 0)
 	{
 		std::cout << "No contact" << std::endl;
-		return ;
+		return;
 	}
 	std::cout << "\nINDEX     |FIRSTNAME |LASTNAME  |NICKNAME" << std::endl;
 	while (i < nbContacts)
@@ -29,28 +29,27 @@ void PhoneBook::search()
 
 size_t PhoneBook::getValidIndex()
 {
-	int	index = -1;
+	int index = -1;
 	std::string input;
 
 	while (!std::cin.eof())
 	{
-        input = "";
+		input = "";
 		std::cout << "Enter contact index (Enter 'home' to quit) : ";
 		std::getline(std::cin, input);
 		if (input == "home" || input == "HOME")
-		{
-			std::cout << "Contact search canceled\n";
-			break ;
-		}
+			break;
 		std::istringstream convert(input);
 		if (convert >> index && index >= 0)
 		{
+			if (index < 0)
+				std::cout << "Invalid index" << std::endl;
 			if (index < static_cast<int>(nbContacts))
 				return (static_cast<size_t>(index));
 			if (index >= 8)
-				std::cout << "Memory is limited to 8 contacts (0 to 7)\n";
+				std::cout << "Memory is limited to 8 contacts (0 to 7)" << std::endl;
 			else
-				std::cout << "No Contact at index " << index << "\n";
+				std::cout << "No Contact at index " << index << std::endl;
 		}
 	}
 	return (static_cast<size_t>(index));
@@ -64,29 +63,28 @@ void PhoneBook::storeContact(std::string &info, std::string str)
 		info = "";
 		std::cout << str;
 		std::getline(std::cin, info);
-        if (info == "home" || info == "HOME")
-            return;
-        if (str == "Phone : ")
-        {
-            for (std::string::const_iterator it = info.begin(); it != info.end(); it++)
-            {
-                if(!std::isdigit(*it))
-                {
-                    std::cout << "Only digits for a phone number" << std::endl;
-                    info = "";
-                    break;
-                }
-            }
-        }
+		if (info == "home" || info == "HOME")
+			return;
+		if (str == "Phone : ")
+		{
+			for (std::string::const_iterator it = info.begin(); it != info.end(); it++)
+			{
+				if (!std::isdigit(*it))
+				{
+					std::cout << "Only digits for a phone number" << std::endl;
+					info = "";
+					break;
+				}
+			}
+		}
 	}
 }
 
 void PhoneBook::add()
 {
-	static size_t	oldestIndex;
+	static size_t oldestIndex;
 
-	std::string element[] = {"Firstname : ", "Lastname : ", "Nickname : ",
-		"Phone : ", "Darkest secret : "};
+	std::string element[] = {"Firstname : ", "Lastname : ", "Nickname : ", "Phone : ", "Darkest secret : "};
 	std::string infos[5];
 	std::cout << "\nNEW CONTACT (Enter : 'home' to quit)\n";
 	for (int i = 0; i < 5; i++)
@@ -95,7 +93,7 @@ void PhoneBook::add()
 		if (infos[i] == "home" || infos[i] == "HOME")
 		{
 			std::cout << "Contact creation canceled\n";
-			return ;
+			return;
 		}
 	}
 	book[oldestIndex++].setContact(infos);
@@ -106,11 +104,11 @@ void PhoneBook::add()
 
 void PhoneBook::chooseContact(void)
 {
-	size_t	contactIndex;
+	size_t contactIndex;
 
 	contactIndex = getValidIndex();
 	if (contactIndex == HOME)
-		return ;
+		return;
 	else if (contactIndex >= nbContacts)
 		chooseContact();
 	else

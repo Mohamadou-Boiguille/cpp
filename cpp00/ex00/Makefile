@@ -1,14 +1,14 @@
 CC = g++
 CFLAGS = -std=c++98 -Wall -Wextra -Werror
 
-SRCS_DIR = src
-OBJS_DIR = .obj
 NAME = Megaphone
 SRCS_LIST = Megaphone.cpp main.cpp
+HEADERS_LIST = Megaphone.hpp
+SRCS_DIR = src
+HEADERS_DIR = inc
+OBJS_DIR = .obj
 SRCS = $(addprefix $(SRCS_DIR)/, $(SRCS_LIST))
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_LIST:.cpp=.o))
-HEADERS_LIST = Megaphone.hpp
-HEADERS_DIR = inc
 HEADERS = $(addprefix $(HEADERS_DIR)/, $(HEADERS_LIST))
 
 all: $(NAME)

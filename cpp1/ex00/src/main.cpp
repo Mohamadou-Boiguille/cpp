@@ -1,29 +1,29 @@
 #include "../inc/Zombie.hpp"
+#include <iostream>
+#include <string>
 
-int	main(void)
+int main(void)
 {
-    Zombie *test[3];
-    std::cout << "\n   NEW ZOMBIE =======================\n" << std::endl;
-    std::cout << "\n\t\033[90m=== Create a new zombie called 'Zomb_one' ===\033[0m" << std::endl;
-    test[0] = newZombie("Zomb_one");
-    std::cout << "\t\033[90m Announce 'Zomb_one'\033[0m" << std::endl;
-    test[0]->announce();
-    std::cout << "\t\033[90m=== Create a new zombie called 'Zomb_two' ===\033[0m" << std::endl;
-    test[1] = newZombie("Zomb_two");
-    std::cout << "\t\033[90m Announce 'Zomb_two'\033[0m" << std::endl;
-    test[1]->announce();
-    std::cout << "\t\033[90m=== Create a new zombie whithout name ===\033[0m" << std::endl;
-    test[2] = newZombie("");
-    std::cout << "\t\033[90m Announce anonymous\033[0m" << std::endl;
-    test[2]->announce();
-    std::cout << "\n\t\033[90m+++ Delete instances should call destructors +++\033[0m\n" << std::endl;
-    delete test[0];
-    delete test[1];
-    delete test[2];
-    std::cout << "\n   RANDOM CHUMP =====================\n" << std::endl;
-    std::cout << "\t\033[90m=== Use randomChump with 'jojo' ===\033[0m" << std::endl;
-    randomChump("jojo");
-    std::cout << "\t\033[90m=== Use randomChump with empty string ===\033[0m\n" << std::endl;
-    randomChump("");
-    return (0);
+	Zombie *test[4];
+	std::string str[4] = {"one", "two", "three", ""};
+	std::cout << std::endl;
+	std::cout << "NEW ZOMBIE ===========" << std::endl;
+	for (int i = 0; i < 4; i++)
+	{
+		std::cout << "=== New zombie '" << str[i] << "' ===" << std::endl;
+		test[i] = newZombie(str[i]);
+		std::cout << "--> Announce()" << std::endl;
+		test[i]->announce();
+	}
+	std::cout << "\n\t\033[90m+++ Delete instances should call destructors +++\033[0m\n"
+			  << std::endl;
+	for (int i = 0; i < 4; i++)
+		delete test[i];
+	std::cout << std::endl;
+	std::cout << "RANDOM CHUMP =========" << std::endl;
+	std::cout << "=== Use randomChump with 'one' ===" << std::endl;
+	randomChump(str[0]);
+	std::cout << "=== Use randomChump with no mame ===" << std::endl;
+	randomChump("");
+	return (0);
 }

@@ -11,12 +11,13 @@ void Contact::setContact(std::string contactArray[])
 
 void Contact::printContact()
 {
-	std::cout << "\nCONTACT INFOS\n";
-	std::cout << "Firstname         : " << firstname << "\n";
-	std::cout << "Lastname          : " << lastname << "\n";
-	std::cout << "Nickname          : " << nickname << "\n";
-	std::cout << "Phone             : " << phone << "\n";
-	std::cout << "Darkest secret    : " << secret << "\n";
+	std::cout << std::endl;
+	std::cout << "CONTACT INFOS" << std::endl;
+	std::cout << "Firstname         : " << firstname << std::endl;
+	std::cout << "Lastname          : " << lastname << std::endl;
+	std::cout << "Nickname          : " << nickname << std::endl;
+	std::cout << "Phone             : " << phone << std::endl;
+	std::cout << "Darkest secret    : " << secret << std::endl;
 }
 
 void Contact::printCategory(std::string &element)

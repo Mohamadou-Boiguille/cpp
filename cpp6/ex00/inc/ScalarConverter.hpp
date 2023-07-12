@@ -1,19 +1,14 @@
 #ifndef SCALARCONVERTER_HPP
 # define SCALARCONVERTER_HPP
+
+#define IMP "impossible"
+#define NAN "nan"
+#define NDIS "Non displayable"
+
 # include <algorithm>
 # include <cctype>
 # include <iostream>
 # include <string>
-
-typedef struct s_convert
-{
-	int		representation;
-	int		toInt;
-	float	toFloat;
-	double	toDouble;
-	char	toChar;
-	std::string strs[4];
-}			t_convert;
 
 class ScalarConverter
 {
@@ -23,9 +18,20 @@ class ScalarConverter
 	ScalarConverter &operator=(const ScalarConverter &other);
 	~ScalarConverter();
 	ScalarConverter(std::string str);
-	void convert(std::string litteral);
 
   private:
+	void removeLeadingSacpesAndZeros(std::string& str);
+	void formatDisplay(std::string& str, int index);
+	void display(void);
+	char convert(std::string& str);
+	bool isInteger(const std::string& str);
+	bool isCharacter(const std::string& str);
+	bool isFloat(const std::string& str);
+	bool isDouble(const std::string& str);
+	bool overflowing(long double nb, int type);
+	std::string getNumStr(int printTo);
+	int		type;
+	double nb;
+	const char * typeDisplay[4];
 };
-
 #endif // !SCALARCONVERTER_HPP
