@@ -9,8 +9,8 @@ int main(void)
 		std::cout << moh[i] << " ";
 	try
 	{
-		std::cout << std::endl
-				  << "At index " << x << " -> " << moh[x] << std::endl;
+		std::cout << std::endl;
+		std::cout << "At index " << x << " -> " << moh[x] << std::endl;
 	}
 	catch (const OutOfRange &e)
 	{
@@ -19,8 +19,8 @@ int main(void)
 	x *= 2;
 	try
 	{
-		std::cout << std::endl
-				  << "At index " << x << " -> " << moh[x] << std::endl;
+		std::cout << std::endl;
+		std::cout << "At index " << x << " -> " << moh[x] << std::endl;
 	}
 	catch (const OutOfRange &e)
 	{

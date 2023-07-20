@@ -69,7 +69,7 @@ class Array
 	};
 
   private:
-	T myArray[N];
+	T *myArray;
 };
 
 #endif // !ITER_HPP
