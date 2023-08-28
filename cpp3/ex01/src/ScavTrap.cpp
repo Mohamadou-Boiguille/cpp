@@ -1,16 +1,12 @@
 #include "../inc/ScavTrap.hpp"
 
-    // ClapTrap();
-    // ClapTrap(std::string pl_name);
-    // ClapTrap(const ClapTrap&);
-    // ClapTrap &operator=(const ClapTrap&);
-    // ~ClapTrap();
 ScavTrap::ScavTrap()
 	: ClapTrap("John Doe"), gate_keeper(0)
 {
     set_energy_pts(100);
     set_hit_pts(50);
     set_damage_pts(20);
+	std::cout << "ScavTrap: " << get_name() << " enter the game." << std::endl;
 }
 
 ScavTrap::ScavTrap(std::string name)
@@ -35,13 +31,14 @@ ScavTrap &ScavTrap::operator=(const ScavTrap& other)
 
 void ScavTrap::attack(const std::string &target)
 {
-    std::cout << "ScavTrap " << get_name() << " attacks " << target;
+    std::cout << "ScavTrap: " << get_name() << " attacks " << target << std::endl;
     set_gate_keeper(-1);
 	if (!get_hit_pts())
     {
         std::cout << "Hey " << get_name() << " is dead !" << std::endl;
 		return ;
     }
+    std::cout << "ScavTrap: ";
 	set_energy_pts(get_energy_pts() - 1);
     std::cout << get_name() << " |E " << get_energy_pts();
     std::cout << "|H " << get_hit_pts();
@@ -70,5 +67,5 @@ void ScavTrap::set_gate_keeper(unsigned int amount)
 
 ScavTrap::~ScavTrap()
 {
-    std::cout << "ScavTrap " << get_name() << " quit the game." << std::endl;
+    std::cout << "ScavTrap: " << get_name() << " quit the game." << std::endl;
 }

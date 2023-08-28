@@ -1,5 +1,6 @@
 #include "../inc/ClapTrap.hpp"
 #include <iostream>
+#include <typeinfo>
 
 #define ATT 1
 #define DMG 2
@@ -9,12 +10,28 @@
 
 ClapTrap::ClapTrap() : name("John Doe")
 {
+    if (typeid(*this) == typeid(ClapTrap))
+    {
+        std::cout << "ClapTrap: ";
+    }
+    else
+    {
+        std::cout << "ScavTrap: ";
+    }
 	std::cout << name << " enter the game." << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string pl_name)
 	: name(pl_name), hit_pts(10), energy_pts(10), damage_pts(0)
 {
+    if (typeid(*this) == typeid(ClapTrap))
+    {
+        std::cout << "ClapTrap: ";
+    }
+    else
+    {
+        std::cout << "ScavTrap: ";
+    }
 	std::cout << name << " enter in the game." << std::endl;
 }
 
@@ -35,6 +52,14 @@ ClapTrap &ClapTrap::operator=(const ClapTrap&other)
 
 ClapTrap::~ClapTrap()
 {
+    if (typeid(*this) == typeid(ClapTrap))
+    {
+        std::cout << "ClapTrap: ";
+    }
+    else
+    {
+        std::cout << "ScavTrap: ";
+    }
 	std::cout << name << " quit the game." << std::endl;
 }
 
@@ -80,6 +105,14 @@ void ClapTrap::attack(const std::string &target)
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
+    if (typeid(*this) == typeid(ClapTrap))
+    {
+        std::cout << "ClapTrap: ";
+    }
+    else
+    {
+        std::cout << "ScavTrap: ";
+    }
 	if (!get_hit_pts())
 		return (log(get_name(), "", 0, DEAD));
 	log(get_name(), "", amount, DMG);
@@ -94,6 +127,14 @@ void ClapTrap::takeDamage(unsigned int amount)
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
+    if (typeid(*this) == typeid(ClapTrap))
+    {
+        std::cout << "ClapTrap: ";
+    }
+    else
+    {
+        std::cout << "ScavTrap: ";
+    }
 	if (!get_hit_pts())
 		return (log(get_name(), "", 0, DEAD));
 	if (!get_energy_pts())
@@ -105,19 +146,23 @@ unsigned int ClapTrap::get_hit_pts()
 {
 	return (ClapTrap::hit_pts);
 }
+
 unsigned int ClapTrap::get_energy_pts()
 {
 	return (energy_pts);
 }
+
 unsigned int ClapTrap::get_damage_pts()
 {
 	return (damage_pts);
 }
+
 void ClapTrap::set_hit_pts(unsigned int amount)
 {
 	if (hit_pts)
 		ClapTrap::hit_pts += amount;
 }
+
 void ClapTrap::set_energy_pts(unsigned int amount)
 {
     if (amount > 0)
@@ -125,11 +170,13 @@ void ClapTrap::set_energy_pts(unsigned int amount)
     else if (hit_pts)
 		ClapTrap::energy_pts -= 1;
 }
+
 void ClapTrap::set_damage_pts(unsigned int amount)
 {
 	if (hit_pts)
 		ClapTrap::damage_pts += amount;
 }
+
 std::string ClapTrap::get_name()
 {
 	return (ClapTrap::name);
