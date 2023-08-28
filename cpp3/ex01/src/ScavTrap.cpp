@@ -21,17 +21,21 @@ ScavTrap::ScavTrap(std::string name)
     set_damage_pts(20);
 }
 
-ScavTrap::ScavTrap(const ScavTrap& other)
+ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other)
 {
-    this->name = other->name;
+    this->gate_keeper = other.gate_keeper;
 }
 
-ScavTrap &ScavTrap::operator=(const ScavTrap&)
+ScavTrap &ScavTrap::operator=(const ScavTrap& other)
 {
-
+    ClapTrap::operator=(other);
+    this->gate_keeper = other.gate_keeper;
+    return *this;
 }
+
 void ScavTrap::attack(const std::string &target)
 {
+    std::cout << "ScavTrap " << get_name() << " attacks " << target;
     set_gate_keeper(-1);
 	if (!get_hit_pts())
     {
@@ -62,4 +66,9 @@ void ScavTrap::guardGate(void)
 void ScavTrap::set_gate_keeper(unsigned int amount)
 {
     this->gate_keeper += amount;
+}
+
+ScavTrap::~ScavTrap()
+{
+    std::cout << "ScavTrap " << get_name() << " quit the game." << std::endl;
 }

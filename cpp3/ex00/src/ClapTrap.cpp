@@ -29,7 +29,12 @@ ClapTrap::ClapTrap(const ClapTrap& other)
 ClapTrap &ClapTrap::operator=(const ClapTrap&other)
 {
     if (this != &other)
+	{
         this->name = other.name;
+		this->hit_pts = other.hit_pts;
+		this->energy_pts = other.energy_pts;
+		this->damage_pts = other.damage_pts;
+	}
     return (*this);
 }
 
