@@ -1,71 +1,57 @@
 #include "../inc/ScavTrap.hpp"
 
-ScavTrap::ScavTrap()
-	: ClapTrap("John Doe"), gate_keeper(0)
-{
-    set_energy_pts(100);
-    set_hit_pts(50);
-    set_damage_pts(20);
-	std::cout << "ScavTrap: " << get_name() << " enter the game." << std::endl;
-}
-
 ScavTrap::ScavTrap(std::string name)
-	: ClapTrap(name), gate_keeper(0)
+	: ClapTrap(name)
 {
-    set_energy_pts(100);
-    set_hit_pts(50);
-    set_damage_pts(20);
-}
-
-ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other)
-{
-    this->gate_keeper = other.gate_keeper;
-}
-
-ScavTrap &ScavTrap::operator=(const ScavTrap& other)
-{
-    ClapTrap::operator=(other);
-    this->gate_keeper = other.gate_keeper;
-    return *this;
+	set_energy_pts(100);
+	set_hit_pts(50);
+	set_damage_pts(20);
 }
 
 void ScavTrap::attack(const std::string &target)
 {
-    std::cout << "ScavTrap: " << get_name() << " attacks " << target << std::endl;
-    set_gate_keeper(-1);
-	if (!get_hit_pts())
-    {
-        std::cout << "Hey " << get_name() << " is dead !" << std::endl;
-		return ;
-    }
-    std::cout << "ScavTrap: ";
-	set_energy_pts(get_energy_pts() - 1);
-    std::cout << get_name() << " |E " << get_energy_pts();
-    std::cout << "|H " << get_hit_pts();
-    std::cout << "|D " << get_damage_pts() << "|";
-	if (!get_energy_pts())
-    {
-        std::cout <<  " is out of energy, attack IMPOSSIBLE";
-        std::cout << std::endl;
-		return;
-    }
-    std::cout << " strikes at " << target << " dealing a damaging blow of ";
-    std::cout << get_damage_pts() << " points." << std::endl;
+	std::cout << "ScavTrap: ";
+	ClapTrap::attack(target);
 }
 
-void ScavTrap::guardGate(void)
+void ScavTrap::takeDamage(unsigned int amount)
 {
-    std::cout << " enter in gate keeper mode :";
-    std::cout << " YOU SHALL NOT PASS !!!";
-    set_gate_keeper(5);
+	std::cout << "ScavTrap: ";
+	ClapTrap::takeDamage(amount);
 }
 
-void ScavTrap::set_gate_keeper(unsigned int amount)
+void ScavTrap::beRepaired(unsigned int amount)
 {
-    this->gate_keeper += amount;
+	std::cout << "ScavTrap: ";
+	ClapTrap::beRepaired(amount);
+}
+void ScavTrap::guardGate()
+{
+	std::cout << "ScavTrap: " << get_name() << " enter in Guard Gate mode." << std::endl;
+}
+
+// coplien
+ScavTrap::ScavTrap()
+	: ClapTrap("John Doe")
+{
+	set_energy_pts(100);
+	set_hit_pts(50);
+	set_damage_pts(20);
+}
+
+ScavTrap::ScavTrap(const ScavTrap &other)
+	: ClapTrap(other)
+{
+	*this = other;
+}
+
+ScavTrap &ScavTrap::operator=(const ScavTrap &other)
+{
+	if (this != &other)
+		ClapTrap::operator=(other);
+	return *this;
 }
 
 ScavTrap::~ScavTrap()
 {
-    std::cout << "ScavTrap: " << get_name() << " quit the game." << std::endl;
 }

@@ -1,4 +1,5 @@
 #include "../inc/ClapTrap.hpp"
+#include <typeinfo>
 
 #define ATT 1
 #define DMG 2
@@ -6,21 +7,13 @@
 #define DEAD 4
 #define REPAIR 5
 
-ClapTrap::ClapTrap(std::string pl_name)
-	: name(pl_name), hit_pts(10), energy_pts(10), damage_pts(0)
+void ClapTrap::log(std::string name, std::string target, unsigned int damage, int type)
 {
-	std::cout << name << " enter in the game." << std::endl;
-};
-ClapTrap::~ClapTrap()
-{
-	std::cout << name << " quit the game." << std::endl;
-};
-void ClapTrap::log(std::string name, std::string target, unsigned int damage,
-		int type)
-{
-    std::cout << name << " |E " << get_energy_pts();
-    std::cout << "|H " << get_hit_pts();
-    std::cout << "|D " << get_damage_pts() << "|";
+	if (typeid(*this) == typeid(ClapTrap))
+		std::cout << "ClapTrap: ";
+	std::cout << name << " |E " << get_energy_pts();
+	std::cout << "|H " << get_hit_pts();
+	std::cout << "|D " << get_damage_pts() << "|";
 	if (type == ATT)
 	{
 		std::cout << " attacks " << target << ", causing ";
@@ -30,16 +23,15 @@ void ClapTrap::log(std::string name, std::string target, unsigned int damage,
 		std::cout << " has no more energy," << target << " canceled." << std::endl;
 	else if (type == DMG)
 	{
-		std::cout << " is taking " << damage << " points of damage. ";
-		std::cout << "New hit points (" << get_hit_pts() << ")" << std::endl;
+		std::cout << " is taking " << damage << " points of damage. " << std::endl;
 	}
 	else if (type == DEAD)
 		std::cout << " is dead." << std::endl;
 	else if (type == REPAIR)
-    {
-        std::cout << target << " +";
-        std::cout << damage << " hit points." << std::endl;
-    }
+	{
+		std::cout << target << " +";
+		std::cout << damage << " hit points." << std::endl;
+	}
 }
 
 void ClapTrap::attack(const std::string &target)
@@ -74,14 +66,15 @@ void ClapTrap::beRepaired(unsigned int amount)
 		return (log(name, " repairing", 0, NO_NRG));
 	set_energy_pts(get_energy_pts() - 1);
 	set_hit_pts(amount);
-    log(get_name(), " is repairing", amount, REPAIR);
+	log(get_name(), " is repairing", amount, REPAIR);
 }
 
+// setters and getters
 unsigned int ClapTrap::get_hit_pts() const
 {
 	return (ClapTrap::hit_pts);
 }
-unsigned int ClapTrap::get_energy_pts()const
+unsigned int ClapTrap::get_energy_pts() const
 {
 	return (energy_pts);
 }
@@ -91,20 +84,45 @@ unsigned int ClapTrap::get_damage_pts() const
 }
 void ClapTrap::set_hit_pts(unsigned int amount)
 {
-	if (hit_pts)
-		ClapTrap::hit_pts += amount;
+	if (this->hit_pts)
+		this->hit_pts += amount;
 }
 void ClapTrap::set_energy_pts(unsigned int amount)
 {
 	if (hit_pts)
-		ClapTrap::energy_pts = amount;
+		this->energy_pts = amount;
 }
 void ClapTrap::set_damage_pts(unsigned int amount)
 {
 	if (hit_pts)
-		ClapTrap::damage_pts += amount;
+		this->damage_pts += amount;
 }
 std::string &ClapTrap::get_name()
 {
 	return (ClapTrap::name);
+}
+
+// coplien
+ClapTrap::ClapTrap()
+	: name("John Doe"), hit_pts(10), energy_pts(10), damage_pts(0)
+{
+	std::cout << "ClapTrap: " << name << " enter in the game (constructor)." << std::endl;
+};
+
+ClapTrap::ClapTrap(std::string pl_name)
+	: name(pl_name), hit_pts(10), energy_pts(10), damage_pts(0)
+{
+	std::cout << "ClapTrap: " << name << " enter in the game (constructor)." << std::endl;
+};
+
+ClapTrap::~ClapTrap()
+{
+	std::cout << "ClapTrap: " << name << " quit the game (destructor)." << std::endl;
+};
+
+ClapTrap &ClapTrap::operator=(const ClapTrap &other)
+{
+	if (this != &other)
+		ClapTrap::operator=(other);
+	return *this;
 }
