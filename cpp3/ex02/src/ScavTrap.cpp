@@ -54,4 +54,5 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &other)
 
 ScavTrap::~ScavTrap()
 {
+	std::cout << "ScavTrap: " << get_name() << " destructor's called." << std::endl;
 }
