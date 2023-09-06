@@ -9,7 +9,7 @@ public:
     Cat ();
     Cat (const Cat &);
     Cat &operator=(const Cat  &);
-    virtual ~Cat ();
+    ~Cat ();
 };
 
 #endif

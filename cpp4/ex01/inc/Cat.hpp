@@ -9,7 +9,6 @@ class Cat : public Animal
 	Cat(const Cat &);
 	Cat &operator=(const Cat &);
 	~Cat();
-    void getThought();
 
   private:
 	Brain *toughts;

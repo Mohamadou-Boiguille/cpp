@@ -1,6 +1,9 @@
 #ifndef ANIMAL_HPP
 # define ANIMAL_HPP
+
 #include <iostream>
+#include "Brain.hpp"
+
 class Animal {
 public:
     Animal ();
@@ -10,10 +13,12 @@ public:
     ~Animal ();
     void makeSound() const;
     std::string getType() const;
+    void getThought();
 protected:
     void setSound(const std::string &sound);
     std::string _type;
     std::string _sound;
+	Brain *_thoughts;
 };
 
 #endif
