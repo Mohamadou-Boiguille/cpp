@@ -21,7 +21,7 @@ int main()
 	{
 		std::cout << std::endl;
 		std::cout << "===> Ask for any animal thought ";
-		std::cout << "(give his index 0 to 9 - q to quit) : ";
+		std::cout << "(give his index 0 to 10 - q to quit) : ";
 		std::cin >> answer;
 		if (answer == "" || answer.empty() || answer.at(0) == '\n' || answer.at(0) == ' ')
 			continue;
@@ -66,8 +66,6 @@ static void castAndLog(Animal *dogsAnCatsArray[], int index)
 {
 	Animal *animal;
 
-	if (index > 9 || index < 0)
-		std::cout << "Index out of range / handle new index" << std::endl;
 	if (index < 0)
 		index = -index;
 	if (index > 10)

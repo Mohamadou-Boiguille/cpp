@@ -9,8 +9,7 @@ public:
     Cat ();
     Cat (const Cat &);
     Cat &operator=(const Cat  &);
-    virtual ~Cat ();
-    void getThought();
+    ~Cat ();
 };
 
 #endif

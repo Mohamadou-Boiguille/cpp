@@ -1,5 +1,4 @@
 #include "../inc/Dog.hpp"
-#include <cstdlib>
 
 Dog::Dog() : Animal("Dog") {
     setSound("Wof wof");
@@ -24,18 +23,4 @@ Dog::~Dog() {
         delete _thoughts;
 		_thoughts = NULL;
 	}
-}
-
-void Dog::getThought()
-{
-	unsigned int	index;
-
-	if (_thoughts)
-	{
-		index = rand() % 100;
-		std::cout << "The " << getType() << " ";
-		std::cout << _thoughts->getString(index) << std::endl;
-	}
-	else
-		std::cout << "The " << getType() << " has no brain (means error)" << std::endl;
 }

@@ -10,7 +10,6 @@ public:
     Dog (const Dog &);
     Dog &operator=(const Dog  &);
     virtual ~Dog ();
-    void getThought();
 };
 
 #endif

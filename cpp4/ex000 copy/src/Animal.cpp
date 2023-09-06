@@ -1,4 +1,5 @@
 #include "../inc/Animal.hpp"
+#include <cstdlib>
 
 Animal::Animal() : _type("Unknown animal"), _sound("Unknown sound")
 {
@@ -54,4 +55,18 @@ void Animal::makeSound() const
 void Animal::setSound(const std::string &sound)
 {
 	_sound = sound;
+}
+
+void Animal::getThought()
+{
+	unsigned int	index;
+
+	if (_thoughts)
+	{
+		index = rand() % 100;
+		std::cout << "The " << getType() << " ";
+		std::cout << _thoughts->getString(index) << std::endl;
+	}
+	else
+		std::cout << "The " << getType() << " has no brain (means error)" << std::endl;
 }
