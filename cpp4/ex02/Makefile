@@ -3,20 +3,18 @@ CFLAGS = -std=c++98 -Wall -Wextra -Werror
 
 SRCS_DIR = src
 OBJS_DIR = .obj
-NAME = frag
-SRCS_LIST = Animal.cpp Dog.cpp Cat.cpp Brain.cpp main.cpp 
-SRCS = $(addprefix $(SRCS_DIR)/, $(SRCS_LIST))
-OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_LIST:.cpp=.o))
-HEADERS_LIST = Animal.hpp Dog.hpp Cat.hpp Brain.hpp
-HEADERS_DIR = inc
-HEADERS = $(addprefix $(HEADERS_DIR)/, $(HEADERS_LIST))
+NAME = Animals
+
+SRCS_LIST = $(wildcard $(SRCS_DIR)/*.cpp)
+OBJS_LIST = $(patsubst $(SRCS_DIR)/%.cpp,$(OBJS_DIR)/%.o,$(SRCS_LIST))
+HEADERS_LIST = $(wildcard inc/*.hpp)
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) -g3 $(CFLAGS) $^ -o $@
+$(NAME): $(OBJS_LIST)
+	$(CC) -g3 $(CFLAGS) -Iinc $^ -o $@
 
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.cpp $(HEADERS) Makefile
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.cpp $(HEADERS_LIST) Makefile
 	mkdir -p $(OBJS_DIR)
 	$(CC) -g3 $(CFLAGS) -c $< -o $@
 
@@ -29,4 +27,3 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-

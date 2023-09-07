@@ -3,76 +3,77 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <limits>
+#include <algorithm>
 
-static void	populateArray(Animal *dogsAnCatsArray[]);
-void		castAndLog(Animal *dogsAnCatsArray[], int index);
+static void populateArray(Animal *dogsAnCatsArray[]);
+static void castAndLog(Animal *dogsAnCatsArray[], int index);
+static void deleteArray(Animal *dogsAnCatsArray[]);
 
-int	main(int argc, char **argv)
+int main()
 {
-	Animal	*dogsAnCatsArray[100];
-	int		index;
+	Animal *dogsAnCatsArray[10];
+	int index;
+	std::string answer;
 
-	std::string answer = " ";
-	(void)argv;
 	populateArray(dogsAnCatsArray);
-	while (!answer.empty() && argc != 2)
+	while (true)
 	{
+		std::cout << std::endl;
 		std::cout << "===> Ask for any animal thought ";
-		std::cout << "(give his index 0 to 99 - q to quit) : ";
+		std::cout << "(give his index 0 to 9 - q to quit) : ";
 		std::cin >> answer;
-		if (std::cin.eof())
-			break ;
-		if (answer.at(0) == 'q' || answer.at(0) == 'Q')
-			break ;
+		if (answer == "" || answer.empty() || answer.at(0) == '\n' || answer.at(0) == ' ')
+			continue;
+		if (std::cin.eof() || answer.at(0) == 'q' || answer.at(0) == 'Q')
+			break;
 		std::istringstream iss(answer);
 		if (!(iss >> index))
-			continue ;
+		{
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			continue;
+		}
 		castAndLog(dogsAnCatsArray, index);
 	}
-	for (int i = 0; i < 100; i++)
-		delete dogsAnCatsArray[i];
+	deleteArray(dogsAnCatsArray);
 	return (0);
 }
 
-static void	populateArray(Animal *dogsAnCatsArray[])
+static void populateArray(Animal *dogsAnCatsArray[])
 {
-    Dog *baseDog;
-    Cat *baseCat;
 	std::cout << "===== create a dogs and cats array =====" << std::endl;
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < 10; i++)
 	{
-        if (i == 0 || i == 50)
-        {
-            if (i == 0)
-                dogsAnCatsArray[0] = baseDog = new Dog;
-            if (i == 50)
-                dogsAnCatsArray[50] = baseCat = new Cat;
-            continue;
-        }
-        else if (i > 0 && i < 50)
-            dogsAnCatsArray[i] = new Dog(*baseDog);
-        else if (i > 50)
-            dogsAnCatsArray[i] = new Cat(*baseCat);
+		std::cout << "  ----" << i << std::endl;
+		if (i % 2)
+			dogsAnCatsArray[i] = new Dog();
+		else
+			dogsAnCatsArray[i] = new Cat();
 	}
 }
 
-void	castAndLog(Animal *dogsAnCatsArray[], int index)
+static void deleteArray(Animal *dogsAnCatsArray[])
 {
-	Dog	*dog;
-	Cat	*cat;
+	for (int i = 0; i < 10; i++)
+	{
+		std::cout << "  ----" << i << std::endl;
+		delete dogsAnCatsArray[i];
+	}
+}
 
-	if (index >= 0 && index < 50)
-	{
-		dog = dynamic_cast<Dog *>(dogsAnCatsArray[index]);
-		dog->makeSound();
-		dog->getThought();
-	}
-	else if (index >= 50 && index < 100)
-	{
-		cat = dynamic_cast<Cat *>(dogsAnCatsArray[index]);
-		cat->makeSound();
-		cat->getThought();
-	}
-	else
-		std::cout << "out of the range" << std::endl;
+static void castAndLog(Animal *dogsAnCatsArray[], int index)
+{
+	Animal *animal;
+
+	if (index > 9 || index < 0)
+		std::cout << "Index out of range / handle new index" << std::endl;
+	if (index < 0)
+		index = -index;
+	if (index > 10)
+		index = index % 10;
+	std::cout << "===== At place " << index << " =====" << std::endl;
+	animal = dogsAnCatsArray[index];
+	animal->makeSound();
+	animal->getThought();
 }

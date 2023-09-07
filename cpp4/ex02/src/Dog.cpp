@@ -1,37 +1,41 @@
 #include "../inc/Dog.hpp"
-#include <iostream>
+#include <cstdlib>
 
-Dog::Dog()
-	: Animal("Dog"), toughts(new Brain())
-{
-	setSound("Wof Wof");
+Dog::Dog() : Animal("Dog") {
+    setSound("Wof wof");
+    std::cout << "Dog constructor called" << std::endl;
 }
 
-Dog::Dog(const Dog &copy) : Animal(copy), toughts(new Brain(*(copy.toughts)))
-{
+Dog::Dog(const Dog &other) : Animal(other) {
+    std::cout << "Dog copy constructor called" << std::endl;
 }
 
-Dog &Dog::operator=(const Dog &copy)
-{
-    if(this != &copy)
-    {
-        Animal::operator=(copy);
-        index = copy.index + 1;
-        toughts = new Brain();
-    }
-    return (*this);
+Dog &Dog::operator=(const Dog &other) {
+    if (this != &other)
+        Animal::operator=(other);
+    std::cout << "Dog assignation operator called" << std::endl;
+    return *this;
+}
+
+Dog::~Dog() {
+	std::cout << "Dog destructor called" << std::endl;
+    if (_thoughts)
+	{
+        delete _thoughts;
+		_thoughts = NULL;
+	}
 }
 
 void Dog::getThought()
 {
-	std::cout << "The Dog nb " << getIndex();
-	std::cout << " " << toughts->getString(getIndex()) << std::endl;
-}
+	unsigned int	index;
 
-Dog::~Dog()
-{
-	if (toughts)
-    {
-		delete toughts;
-    }
+	if (_thoughts)
+	{
+		index = rand() % 100;
+		std::cout << "The " << getType() << " ";
+		std::cout << _thoughts->getString(index) << std::endl;
+	}
+	else
+		std::cout << "The " << getType() << " has no brain (means error)" << std::endl;
 }

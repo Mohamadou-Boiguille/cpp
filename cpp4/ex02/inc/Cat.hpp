@@ -1,16 +1,16 @@
-#pragma once
+#ifndef CAT_HPP
+# define CAT_HPP
 
+# include <iostream>
 # include "Animal.hpp"
 
-class Cat : public Animal
-{
-  public:
-	Cat();
-	Cat(const Cat &);
-	Cat &operator=(const Cat &);
-	~Cat();
+class Cat : public Animal {
+public:
+    Cat ();
+    Cat (const Cat &);
+    Cat &operator=(const Cat  &);
+    virtual ~Cat ();
     void getThought();
-
-  private:
-	Brain *toughts;
 };
+
+#endif
