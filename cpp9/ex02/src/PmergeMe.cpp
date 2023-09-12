@@ -103,20 +103,19 @@ void PmergeMe::displayList(std::string beforeOrAfter, std::list<int> listToDispl
 	std::cout << std::endl;
 }
 
-void PmergeMe::displayTime(std::string container)
+void PmergeMe::displayTime(std::string containerType)
 {
-	std::cout << "time to process a range of \t" << _listSize << " elements with " << container << (_sortEnd - _sortStart) / 1000000.0 << " us" << std::endl;
+	std::cout << "Time to process a range of \t" << _listSize << " elements with " << containerType << (_sortEnd - _sortStart) / 1000000.0 << " us" << std::endl;
 }
 
 void PmergeMe::convertInputToList(char **inputArray)
 {
-	for (size_t i = 1; inputArray[i]; i++)
+	for (size_t i = 0; inputArray[i]; i++)
 	{
 		char *ptrEndStr;
 		long long int value = strtol(inputArray[i], &ptrEndStr, 10);
 		if (*ptrEndStr != '\0')
 			throw std::runtime_error("Bad format of a number");
-		// std::cerr << "Error: " << inputArray[i] << "is invalid" << std::endl;
 		else
 		{
 			if (value >= INT_MIN && value <= INT_MAX)
@@ -126,7 +125,6 @@ void PmergeMe::convertInputToList(char **inputArray)
 			}
 			else
 				throw std::runtime_error("Overflow from a number");
-			// std::cerr << "Error: Overflow at index " << i << std::endl;
 		}
 	}
 }
@@ -136,7 +134,6 @@ long long PmergeMe::getCurrentTime()
 	struct timespec currentTime;
 	if (clock_gettime(CLOCK_REALTIME, &currentTime) != 0)
 		throw std::runtime_error("clock_gettime failed");
-	// return -1;
 	long long currentTimeNs = static_cast<long long>(currentTime.tv_sec) * 1000000000LL + static_cast<long long>(currentTime.tv_nsec);
 	return currentTimeNs;
 }
