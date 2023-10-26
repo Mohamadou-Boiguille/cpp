@@ -1,4 +1,5 @@
 #include "../inc/Form.hpp"
+#include "../inc/Exceptions.hpp"
 
 Form ::Form()
 {
@@ -7,9 +8,9 @@ Form ::Form(std::string name, unsigned int minSign, unsigned int minExec)
 	: name(name), isFormSigned(false), minExec(minExec), minSign(minSign)
 {
     if (minSign == 0 || minExec == 0)
-		throw GradeTooHighException("", getName(), true);
+		throw FormGradeTooHighException("", getName(), true);
     else if (minSign > 150 || minExec > 150)
-		throw GradeTooLowException("", getName(), true);
+		throw FormGradeTooLowException("", getName(), true);
     else
     {
         std::cout << GREY_COLOR;
@@ -30,6 +31,9 @@ Form &Form ::operator=(const Form &other)
 {
 	if (this != &other)
 	{
+        this->isFormSigned = other.isFormSigned;
+        this->minSign = other.minSign;
+        this->minExec = other.minExec;
 	}
 	return (*this);
 }
@@ -56,7 +60,7 @@ std::string Form ::getName()
 void Form ::beSigned(Bureaucrat *bcrat)
 {
 	if (bcrat->getGrade() > this->getMinSign())
-		throw GradeTooLowException(bcrat->getName(), getName(), false);
+		throw FormGradeTooLowException(bcrat->getName(), getName(), false);
     if (this->isFormSigned == true)
     {
         std::cout << GREY_COLOR << this->getName();

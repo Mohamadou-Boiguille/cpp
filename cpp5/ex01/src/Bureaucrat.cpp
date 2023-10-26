@@ -1,4 +1,5 @@
 #include "../inc/Bureaucrat.hpp"
+#include "../inc/Exceptions.hpp"
 #include "../inc/Form.hpp"
 #include <exception>
 #include <iostream>
@@ -8,19 +9,16 @@ Bureaucrat::Bureaucrat()
 {
 }
 
-Bureaucrat::Bureaucrat(std::string name, unsigned int grade)
-	: name(name.empty() ? "John Doe" : name), grade(grade)
+Bureaucrat::Bureaucrat(const std::string name, unsigned int grade)
+	: name(name.empty() ? "Uknown" : name), grade(grade)
 {
-    if (grade == 0)
-        throw GradeTooHighException(this->getName());
-    else if (grade > 150)
-        throw GradeTooLowException(this->getName());
-    else
+    if (grade > 150 || grade < 1)
     {
-        std::cout << GREY_COLOR << this->name << " (Grade ";
-        std::cout << this->grade << ") is created." << RESET_COLOR;
-        std::cout << std::endl;
+        std::cerr << RED_COLOR << grade << " is a wrong grade, put to lowest possible grade (150)" << RESET_COLOR << std::endl;
+        this->grade = 150;
     }
+    else
+        this->grade = grade;
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &other)
@@ -33,7 +31,6 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
 	if (this != &other)
 	{
 		this->grade = other.grade;
-		this->name = other.name;
 	}
 	return (*this);
 }
@@ -46,10 +43,9 @@ std::ostream &operator<<(std::ostream &os, const Bureaucrat &bcrat)
 
 Bureaucrat::~Bureaucrat()
 {
-	// Destructor implementation
 }
 
-std::string Bureaucrat::getName() const
+const std::string Bureaucrat::getName() const
 {
 	return (this->name);
 }
